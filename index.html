@@ -3,42 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Bereich</title>
-    <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
-        .login-card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
-        input { padding: 10px; width: 200px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; }
-        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-        #error { color: red; margin-top: 10px; display: none; }
-    </style>
+    <title>Willkommen auf Lukas' Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="login-card">
-    <h2>Admin Login</h2>
-    <p>Bitte Passwort eingeben:</p>
-    <input type="password" id="pwInput" placeholder="Passwort...">
+<div class="container">
+    <h1>Willkommen auf Lukas' Website</h1>
+
+    <h2>Über diese Website</h2>
+    <p>Dies ist eine Website zu Testzwecken! Jeglicher Inhalt dient nur zum Testen der Funktionen.</p>
     <br>
-    <button onclick="accessAdmin()">Einloggen</button>
-    <p id="error">Zugriff verweigert oder Seite nicht gefunden.</p>
+
+    <!-- Ausklappbare Sektionen -->
+    <div class="collapsible-section">
+        <div class="collapsible-header">
+            Bilder
+        </div>
+        <div class="collapsible-content">
+            <div class="image-gallery">
+                <img src="1.jpg" alt="Bild 1" class="gallery-image">
+                <img src="2.png" alt="Bild 2" class="gallery-image">
+                <img src="3.png" alt="Bild 3" class="gallery-image">
+                <img src="4.jpeg" alt="Bild 4" class="gallery-image">
+                <img src="5.png" alt="Bild 5" class="gallery-image">
+                <img src="6.png" alt="Bild 6" class="gallery-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section">
+        <div class="collapsible-header">
+            Teil 2
+        </div>
+        <div class="collapsible-content">
+            <p>
+                Hier ist ein Beispiel für einen Link auf eine andere Webseite: <a href="https://www.wikipedia.org" target="_blank">Besuche Wikipedia</a>.
+            </p>
+        </div>
+    </div>
+
+    <div class="collapsible-section">
+        <div class="collapsible-header">
+            Teil 3
+        </div>
+        <div class="collapsible-content">
+            <p>
+                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+            </p>
+        </div>
+    </div>
+
+    <div class="collapsible-section">
+        <div class="collapsible-header">
+            Teil 4
+        </div>
+        <div class="collapsible-content">
+            <p>
+                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Lukas Leithner</p>
+    </footer>
+
+</div>
+
+<!-- Das Modal für die vergrößerte Ansicht -->
+<div id="image-modal" class="modal">
+    <span class="close-button">&times;</span>
+    <img class="modal-content" id="modal-image">
+    <a class="prev-button">&#10094;</a>
+    <a class="next-button">&#10095;</a>
 </div>
 
 <script>
-    function accessAdmin() {
-        const pw = document.getElementById('pwInput').value;
-        if (pw) {
-            // Wir versuchen direkt die Datei [Passwort].html aufzurufen
-            // Wenn das Passwort "geheim123" ist, leitet es zu "geheim123.html" weiter
-            window.location.href = pw + ".html";
-        }
-    }
+    const collapsibleSections = document.querySelectorAll('.collapsible-section');
+    const imageModal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const closeButton = document.querySelector('.close-button');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    let currentImageIndex = 0;
 
-    // "Enter"-Taste zum Einloggen ermöglichen
-    document.getElementById("pwInput").addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            accessAdmin();
+    // Funktionalität zum Ein- und Ausklappen der Sektionen
+    collapsibleSections.forEach(section => {
+        const header = section.querySelector('.collapsible-header');
+        header.addEventListener('click', () => {
+            section.classList.toggle('expanded');
+        });
+    });
+
+    // Funktionalität zum Vergrößern der Bilder
+    galleryImages.forEach((image, index) => {
+        image.addEventListener('click', () => {
+            currentImageIndex = index;
+            // Setzt das Modal auf 'flex' anstatt 'block' für die Zentrierung
+            imageModal.style.display = 'flex';
+            modalImage.src = galleryImages[currentImageIndex].src;
+        });
+    });
+
+    // Funktionalität zum Schließen der vergrößerten Ansicht
+    closeButton.addEventListener('click', () => {
+        imageModal.style.display = 'none';
+    });
+
+    // Schließen, wenn außerhalb des Bildes geklickt wird
+    window.addEventListener('click', (event) => {
+        if (event.target === imageModal) {
+            imageModal.style.display = 'none';
         }
+    });
+
+    // Funktion zum Anzeigen des nächsten Bildes
+    nextButton.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+        modalImage.src = galleryImages[currentImageIndex].src;
+    });
+
+    // Funktion zum Anzeigen des vorherigen Bildes
+    prevButton.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        modalImage.src = galleryImages[currentImageIndex].src;
     });
 </script>
 

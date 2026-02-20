@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fullsize Image</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Verhindert Scrollen */
-        }
+    body {
+        margin: 0;
+        display: flex;
+        justify-content: center; /* Bild horizontal zentrieren */
+        align-items: center;     /* Bild vertikal zentrieren */
+        height: 100vh;
+        background-color: #f0f0f0; /* Hintergrundfarbe für den leeren Bereich */
+    }
 
-        .fullscreen-bg {
-            width: 100%;
-            height: 100vh;
-            background-image: url('affe_mittelfinger.jpg'); /* Ersetze dies durch deine Bild-URL */
-            background-size: cover; /* Bild füllt den Raum aus */
-            background-position: center; /* Bild bleibt zentriert */
-            background-repeat: no-repeat;
-        }
-    </style>
+    .fullscreen-bg {
+        width: 50%;              /* Hier Breite anpassen (z. B. 50% oder 500px) */
+        height: 50%;             /* Hier Höhe anpassen */
+        background-image: url('affe_mittelfinger.jpg');
+        background-size: contain; /* Bild wird nicht abgeschnitten */
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style
 </head>
 <body>
 
